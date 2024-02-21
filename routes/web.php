@@ -7,6 +7,7 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\adminController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,9 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 
 //UI Pages Routs
 Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
@@ -138,3 +142,11 @@ Route::group(['prefix' => 'icons'], function() {
 //Extra Page Routs
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
+
+
+
+
+Route::get('/create', [adminController::class, 'create'])->name('create');
+Route::post('/add', [adminController::class, 'store'])->name('store');
+Route::get('/all-tests', [adminController::class, 'show'])->name('show');
+Route::get('/view-test/{id}', [adminController::class, 'view'])->name('view');
