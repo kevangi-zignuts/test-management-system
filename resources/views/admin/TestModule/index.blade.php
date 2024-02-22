@@ -8,10 +8,8 @@
                             <h4 class="card-title mb-0">All Tests</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0">
-                            <a href="#" class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon"
-                                data-bs-toggle="tooltip" data-modal-form="form" data-icon="person_add" data-size="small"
-                                data--href="{{ route('permission.create') }}" data-app-title="Create New Test"
-                                data-placement="top" title="New Test">
+                            <a href="{{ route('create') }}" class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon"
+                                data-bs-toggle="tooltip" title="New Test">
                                 <i class="btn-inner">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -19,9 +17,10 @@
                                             d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                     </svg>
                                 </i>
-                                <span>New Permission</span>
+                                {{-- <span>New Permission</span> --}}
+                                <span>Create Test</span>
                             </a>
-                            <a href="#" class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon"
+                            {{-- <a href="#" class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon"
                                 data-bs-toggle="tooltip" data-modal-form="form" data-icon="person_add" data-size="small"
                                 data--href="{{ route('role.create') }}" data-app-title="Add new role"
                                 data-placement="top" title="New Role">
@@ -33,10 +32,10 @@
                                     </svg>
                                 </i>
                                 <span>New Role</span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <div class="table-responsive">
                             {{ Form::open(['url' => '#', 'method' => 'get']) }}
                             <table class="table table-bordered">
@@ -163,6 +162,40 @@
                                 {{ Form::submit(__('global-message.save'), ['class' => 'btn btn-md btn-primary']) }}
                             </div>
                             {{ Form::close() }}
+                        </div>
+                    </div> --}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">level</th>
+                                    <th class="text-center"></th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($tests as $test)
+                                        <tr>
+                                            <td> {{ $test->test_name }} </td>
+                                            <td> {{ $test->level }} </td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <a href="{{ route('view', ['id' => $test->id]) }} "
+                                                        class="btn btn-primary btn-sm">View</a>
+                                                    <a href="{{ route('edit', ['id' => $test->id]) }}"
+                                                        class="btn btn-primary btn-sm ml-1">Edit</a>
+                                                    <form action="{{ route('delete', ['id' => $test->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-primary btn-sm ml-3"
+                                                            onclick="return confirm('Are you sure You want to delete')">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

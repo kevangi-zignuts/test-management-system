@@ -7,7 +7,8 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\adminController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\QuestionController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -145,8 +146,20 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
 
 
+Route::group(['prefix' => 'test'], function(){
+    Route::get('/create', [TestController::class, 'create'])->name('create');
+    Route::post('/add', [TestController::class, 'store'])->name('store');
+    Route::get('/index', [TestController::class, 'show'])->name('show');
+    Route::get('/view/{id}', [TestController::class, 'view'])->name('view');
+    Route::get('/edit/{id}', [TestController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [TestController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [TestController::class, 'delete'])->name('delete');
+});
 
-Route::get('/create', [adminController::class, 'create'])->name('create');
-Route::post('/add', [adminController::class, 'store'])->name('store');
-Route::get('/all-tests', [adminController::class, 'show'])->name('show');
-Route::get('/view-test/{id}', [adminController::class, 'view'])->name('view');
+Route::group(['prefix' => 'questions'], function(){
+    Route::get('/test-index', [QuestionController::class, 'index'])->name('questions.test.index');
+    Route::get('/create/{id}', [QuestionController::class, 'create'])->name('questions.create');
+    Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
+    Route::get('/show/{id}', [QuestionController::class, 'show'])->name('questions.show');
+    Route::get('/view/{id}', [QuestionController::class, 'view'])->name('questions.view');
+});

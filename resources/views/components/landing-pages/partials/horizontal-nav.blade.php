@@ -20,9 +20,8 @@
         </div>
         <ul class="navbar-nav iq-nav-menu  list-unstyled" id="header-menu">
             <li class="nav-item ">
-                <a class="nav-link menu-arrow justify-content-start"
-                    data-bs-toggle="collapse" href="#homeData" role="button" aria-expanded="false"
-                    aria-controls="homeData">
+                <a class="nav-link menu-arrow justify-content-start" data-bs-toggle="collapse" href="#homeData"
+                    role="button" aria-expanded="false" aria-controls="homeData">
                     <span class="item-name">Home</span>
                     <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-18" width="18" height="18"
                         viewBox="0 0 24 24">
