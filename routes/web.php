@@ -1,5 +1,5 @@
 <?php
-
+require_once app_path('Http/Controllers/Auth/AdminController.php');
 // Controllers
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Security\RolePermission;
@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\UsersController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -50,9 +52,6 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 
 //UI Pages Routs
 Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
@@ -65,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+
 });
 
 //App Details Page => 'Dashboard'], function() {
@@ -145,7 +145,7 @@ Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pa
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
 
 
-
+//Admin Side Test Page Routs
 Route::group(['prefix' => 'test'], function(){
     Route::get('/create', [TestController::class, 'create'])->name('create');
     Route::post('/add', [TestController::class, 'store'])->name('store');
@@ -156,10 +156,17 @@ Route::group(['prefix' => 'test'], function(){
     Route::delete('/delete/{id}', [TestController::class, 'delete'])->name('delete');
 });
 
+//Admin Side Question Page Routs
 Route::group(['prefix' => 'questions'], function(){
-    Route::get('/test-index', [QuestionController::class, 'index'])->name('questions.test.index');
     Route::get('/create/{id}', [QuestionController::class, 'create'])->name('questions.create');
     Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
     Route::get('/show/{id}', [QuestionController::class, 'show'])->name('questions.show');
     Route::get('/view/{id}', [QuestionController::class, 'view'])->name('questions.view');
+    Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('questions.edit');
+    Route::put('/update/{id}', [QuestionController::class, 'update'])->name('questions.update');
+    Route::delete('/delete/{id}', [QuestionController::class, 'delete'])->name('questions.delete');
+});
+
+Route::group(['prefix' => 'users'], function(){
+    Route::get('/index', [UsersController::class, 'index'])->name('users.index');
 });

@@ -8,6 +8,8 @@
                             <h4 class="card-title mb-0">All Questions</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0">
+                            <a href="{{ route('show') }}">Back</a>
+                            {{-- {{ $questions[0]['test_id'] }} --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -38,10 +40,20 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a
-                                                    href="{{ route('questions.view', ['id' => $question->id]) }}">View</a>
-                                                <a href="">Edit</a>
-                                                <a href="">Delete</a>
+                                                <div class="d-flex gap-2">
+                                                    <a href="{{ route('questions.view', ['id' => $question->id]) }}"
+                                                        class="btn btn-primary btn-sm ml-3">View</a>
+                                                    <a href="{{ route('questions.edit', ['id' => $question->id]) }}"
+                                                        class="btn btn-primary btn-sm ml-3">Edit</a>
+                                                    <form
+                                                        action="{{ route('questions.delete', ['id' => $question->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-primary btn-sm ml-3"
+                                                            onclick="return confirm('Are you sure You want to delete Question')">Delete</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -190,6 +190,10 @@
                                                         <button type="submit" class="btn btn-primary btn-sm ml-3"
                                                             onclick="return confirm('Are you sure You want to delete')">Delete</button>
                                                     </form>
+                                                    <a href="{{ route('questions.show', ['id' => $test->id]) }}"
+                                                        class="btn btn-primary btn-sm ml-1">View Questions</a>
+                                                    <a href="{{ route('questions.create', ['id' => $test->id]) }}"
+                                                        class="btn btn-primary btn-sm ml-1">Add Question</a>
                                                 </div>
                                             </td>
                                         </tr>

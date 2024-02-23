@@ -67,7 +67,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $questions = Question::all();
+        $questions = Question::where('test_id', $id)->get();
         return view('admin.question.index', ['questions' => $questions]);
     }
 
@@ -91,7 +91,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::findOrFail($id);
-        return view('admin.question-edit', ['question' => $question]);
+        return view('admin.question.edit', ['question' => $question]);
     }
 
     /**
@@ -111,7 +111,25 @@ class QuestionController extends Controller
             'answer' => "required",
         ]);
         $question = Question::findOrFail($id);
+        $test_id = $question->test_id;
         $question->update($request->only(['question_name', 'option1', 'option2', 'option3']));
-        return redirect()->route('questions.show')->with('success', 'Test updated successfully');
+        return redirect()->route('questions.show', ['id' => $test_id])->with('success', 'Test updated successfully');
+    }
+
+    /**
+     * Remove the specified test from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $data = Question::find($id);
+        if(!$data){
+            return redirect()->route('show')->with('fail', 'We can not found data');;
+        }
+        $test_id = $data->test_id;
+        $data->delete();
+        return redirect()->route('questions.show', ['id' => $test_id])->with('success', 'Question deleted successfully');
     }
 }
