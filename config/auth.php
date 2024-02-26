@@ -78,8 +78,8 @@ return [
 
         'admin' => [
             'driver' => 'eloquent',
-            // 'model' => 'App\Http\Controllers\Auth\AdminController::class',
-            'model' => App\Models\Admin::class,
+            'model' => 'App\Http\Controllers\Auth\AdminController::class',
+            // 'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

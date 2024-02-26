@@ -1,5 +1,5 @@
 <?php
-require_once app_path('Http/Controllers/Auth/AdminController.php');
+// require_once app_path('Http/Controllers/Auth/AdminController.php');
 // Controllers
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Security\RolePermission;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Auth\AdminController;
-use App\Http\Controllers\Auth\UsersController;
+use App\Http\Controllers\UsersController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +65,11 @@ Route::group(['middleware' => 'auth'], function () {
     // Users Module
     Route::resource('users', UserController::class);
 
+    // Route::group(['prefix' => 'admin'], function(){
+    //     Route::get('/login', [AdminController::class, 'showLoginForm']);
+    //     Route::post('/login', [AdminController::class, 'login']);
+    //     Route::post('/logout', [AdminController::class, 'logout']);
+    // });
 });
 
 //App Details Page => 'Dashboard'], function() {
@@ -167,6 +172,8 @@ Route::group(['prefix' => 'questions'], function(){
     Route::delete('/delete/{id}', [QuestionController::class, 'delete'])->name('questions.delete');
 });
 
-Route::group(['prefix' => 'users'], function(){
-    Route::get('/index', [UsersController::class, 'index'])->name('users.index');
+Route::group(['prefix' => 'user'], function(){
+    Route::get('/index', [UsersController::class, 'index'])->name('user.index');
+    Route::get('/test/{id}', [UsersController::class, 'test'])->name('user.test');
+    Route::post('/result/{id}', [UsersController::class, 'result'])->name('user.result');
 });

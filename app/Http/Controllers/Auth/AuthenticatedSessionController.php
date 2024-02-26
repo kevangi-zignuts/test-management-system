@@ -52,7 +52,7 @@ class AuthenticatedSessionController extends Controller
             return redirect(RouteServiceProvider::HOME);
         }
         $tests = Test::all();
-        return redirect()->route('users.index', ['tests' => $tests]);
+        return redirect()->route('user.index', ['tests' => $tests]);
     }
 
     /**
