@@ -14,6 +14,11 @@
 </head>
 
 <body>
+    {{-- {!! view('user.component._body')->with('slot', 'Hello')->render() !!} --}}
+    {{-- <x-_body>Hello</x-_body> --}}
+
+    {{-- <x-user.components._body>Hello</x-user.components._body> --}}
+    @include('user.components._app_toast')
     <header class="header bg-primary">
         <div class="left-title">JS Quiz</div>
         <div class="right-title">Total Questions: <span id="tque"></span></div>
@@ -32,25 +37,23 @@
                             @csrf
                             @foreach ($questions as $question)
                                 <fieldset class="form-group">
-                                    <input type="hidden" name="question_id{{ $i }}"
+                                    <input type="hidden" name="test[{{ $question->id }}][question]"
                                         value="{{ $question->id }}">
 
-                                    <h4><span id="qid">{{ $i }}.</span> <span
-                                            id="question{{ $i }}">{{ $question->question_name }}</span></h4>
+                                    <h4>{{ $question->question_name }}</span></h4>
 
                                     <div class="option-block-container" id="question-options">
-                                        <input type="radio" name="option{{ $i }}" id=""
+                                        <input type="radio" name="test[{{ $question->id }}][answer]" id=""
                                             value="A">{{ 'A) ' . $question->option1 }}
-                                        <input type="radio" name="option{{ $i }}" id=""
+                                        <input type="radio" name="test[{{ $question->id }}][answer]" id=""
                                             value="B">{{ 'B) ' . $question->option2 }}
-                                        <input type="radio" name="option{{ $i }}" id=""
+                                        <input type="radio" name="test[{{ $question->id }}][answer]" id=""
                                             value="C">{{ 'C) ' . $question->option3 }}
                                     </div> <!-- End of option block -->
-
-                                    @php
-                                        $i++;
-                                    @endphp
                                 </fieldset>
+                                @php
+                                    $i++;
+                                @endphp
                             @endforeach
                             {{-- <button name="previous" id="previous" class="btn btn-success">Previous</button>
                             &nbsp;
@@ -62,11 +65,10 @@
             </div> <!-- End of row -->
         </div> <!-- ENd of container fluid -->
     </div> <!-- End of content -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-
+    <script src="{{ asset('js/script.js') }}"></script> --}}
 </body>
 
 </html>

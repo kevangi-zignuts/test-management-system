@@ -1,7 +1,8 @@
 <div id="loading">
     @include('partials.dashboard._body_loader')
 </div>
-@include('partials.dashboard._body_sidebar')
+{{-- @include('partials.dashboard._body_sidebar') --}}
+@include('user.components._body_sidebar')
 <main class="main-content">
     <div class="position-relative">
         @include('partials.dashboard._body_header')
@@ -10,6 +11,7 @@
 
     <div class="conatiner-fluid content-inner mt-n5 py-0">
         {{-- {{ $slot }} --}}
+        @include('user.index')
     </div>
 
     {{-- @include('partials.dashboard._body_footer') --}}

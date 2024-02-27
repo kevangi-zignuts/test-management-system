@@ -20,7 +20,7 @@
             <span class="item-name">Dashboard</span>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false"
             aria-controls="horizontal-menu">
             <i class="icon">
@@ -132,8 +132,7 @@
                         fill="currentColor"></path>
                 </svg>
             </i>
-            {{-- <span class="item-name">Admin</span> --}}
             <span class="item-name">Tests</span>
         </a>
-    </li>
+    </li> --}}
 </ul>

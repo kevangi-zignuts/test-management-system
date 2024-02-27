@@ -152,7 +152,7 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
 //Admin Side Test Page Routs
 Route::group(['prefix' => 'test'], function(){
-    Route::get('/create', [TestController::class, 'create'])->name('create');
+    Route::get('/create', [TestController::class, 'create'])->name('test.create');
     Route::post('/add', [TestController::class, 'store'])->name('store');
     Route::get('/index', [TestController::class, 'show'])->name('show');
     Route::get('/view/{id}', [TestController::class, 'view'])->name('view');
