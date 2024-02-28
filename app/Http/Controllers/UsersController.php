@@ -85,6 +85,11 @@ class UsersController extends Controller
         return view('user.result', ['result' => $result]);
     }
 
+    public function filterTest(){
+    //     $startDate = '2021-06-01';
+    //     $endDate = '2021-06-30';
 
+    //     $posts = Post::whereBetween('created_at', [$startDate, $endDate])->get();
+    }
 
 }

@@ -1,6 +1,7 @@
 <?php
-// require_once app_path('Http/Controllers/Auth/AdminController.php');
 // Controllers
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
@@ -51,7 +52,8 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 });
 
 //UI Pages Routs
-Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
+// Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
+Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('uisheet');
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
