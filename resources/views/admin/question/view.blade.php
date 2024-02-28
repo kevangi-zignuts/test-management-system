@@ -7,6 +7,9 @@
     <title>View Test</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 </html>
@@ -23,26 +26,27 @@
                             <h4 class="card-title mb-0">View Question:- </h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0 d-flex">
-                            <a href="#" class="btn btn-outline-primary ml-3" data-bs-toggle="tooltip"
+                            {{-- <a href="{{ route('questions.show', ['id' => $question->test_id]) }}"
+                                class="btn btn-outline-primary ml-3" data-bs-toggle="tooltip"
                                 title="View all Questions">
-                                <span>View</span>
-                            </a>
-                            <a href="#" class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip"
-                                title="Edit This Test">
-                                <i class="btn-inner">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                </i>
+                                <span>Back</span>
+                            </a> --}}
+                            <a href="{{ route('questions.index', ['id' => $question->test_id]) }}"
+                                class="btn btn-outline-primary rounded-circle" data-bs-toggle="tooltip"
+                                title="Back"><i class="fa-solid fa-arrow-left"></i></a>
+
+                            <a href="{{ route('questions.edit', ['id' => $question->id]) }}"
+                                class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip" title="Edit This Test">
+                                <i class="fa-solid fa-pen-to-square"></i>
                                 <span>Edit</span>
                             </a>
-                            <form action="#" method="post" class="ml-3">
+                            <form action="{{ route('questions.delete', ['id' => $question->id]) }}" method="post"
+                                class="ml-3">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-primary"
-                                    onclick="return confirm('Are you sure You want to delete')">Delete</button>
+                                    onclick="return confirm('Are you sure You want to delete')"><i
+                                        class="fa-solid fa-trash"></i> Delete</button>
                             </form>
                         </div>
                     </div>

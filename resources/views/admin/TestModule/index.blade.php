@@ -52,34 +52,46 @@
                                                 <td> {{ $test->test_name }} </td>
                                                 <td> {{ $test->level }} </td>
                                                 <td>
-                                                    <div class="d-flex gap-2">
-                                                        <a href="{{ route('view', ['id' => $test->id]) }} "
+                                                    <div class=" gap-2">
+                                                        <a href="{{ route('test.view', ['id' => $test->id]) }} "
                                                             data-bs-toggle="tooltip" title="View Test"><i
                                                                 class="fa-solid fa-clipboard-question"></i></a>
-                                                        <a href="{{ route('edit', ['id' => $test->id]) }}"
+                                                        <a href="{{ route('test.edit', ['id' => $test->id]) }}"
                                                             data-bs-toggle="tooltip" title="Edit Test Details"><i
                                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                                        <form action="{{ route('delete', ['id' => $test->id]) }}"
-                                                            method="post">
+                                                        <form action="{{ route('test.delete', ['id' => $test->id]) }}"
+                                                            method="post" class="d-inline pl-0">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="" data-bs-toggle="tooltip"
-                                                                title="Delete Test"><button type="submit"
-                                                                    class="btn"
-                                                                    onclick="return confirm('Are you sure You want to delete')"><i
-                                                                        class="fa-solid fa-trash"></i></button></a>
+                                                            <button type="submit" class="btn-link"
+                                                                style="border: none; background: none;"
+                                                                onclick="return confirm('Are you sure You want to delete')"
+                                                                data-bs-toggle="tooltip" title="Delete Test"><i
+                                                                    class="fa-solid fa-trash"></i></button>
                                                         </form>
-                                                        <a href="{{ route('questions.show', ['id' => $test->id]) }}"
-                                                            class="btn btn-primary btn-sm ml-1"><i
-                                                                class="fa-brands fa-quora"></i> View Questions</a>
                                                         {{-- <a href="{{ route('questions.create', ['id' => $test->id]) }}"
                                                             class="btn btn-primary btn-sm ml-1">Add Question</a> --}}
+                                                        <a href="{{ route('questions.index', ['id' => $test->id]) }}"
+                                                            class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon"
+                                                            data-bs-toggle="tooltip" title="View All Questions">
+                                                            <i class="btn-inner">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                                    fill="none" viewBox="0 0 24 24"
+                                                                    stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                                                </svg>
+                                                            </i>
+                                                            <span>View Questions</span>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                {{-- {{ $tests->links() }} --}}
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-<div class="dashboard w-75 text-center mx-auto bg-white p-5 w-100">
+<div class="dashboard w-75 text-center mx-auto bg-white p-5 w-100 rounded">
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">

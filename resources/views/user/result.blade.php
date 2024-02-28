@@ -11,12 +11,16 @@
 </head>
 
 <body>
-    <h1>Result</h1>
-    <h3>Total Question in the test :- {{ $result['total_question'] }}</h3>
-    <h3>Correct Answer :- {{ $result['correct_answer'] }}</h3>
-    <h3>Wrong Answer :- {{ $result['wrong_answer'] }}</h3>
-    <h3>Percentage :- {{ $result['percentage'] }}</h3>
-    <a href="{{ route('user.index') }}" class="btn btn-outline-primary">Back</a>
+    <div class="card mx-auto">
+        <div class="card-body">
+            <h1>Result</h1>
+            <h3>Total Question in the test :- {{ $result['total_question'] }}</h3>
+            <h3>Correct Answer :- {{ $result['correct_answer'] }}</h3>
+            <h3>Wrong Answer :- {{ $result['wrong_answer'] }}</h3>
+            <h3>Percentage :- {{ $result['percentage'] }}</h3>
+            <a href="{{ route('user.index') }}" class="btn btn-outline-primary">Back</a>
+        </div>
+    </div>
 </body>
 
 </html>

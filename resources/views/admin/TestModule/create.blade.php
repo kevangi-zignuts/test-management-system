@@ -25,8 +25,8 @@
                             <h4 class="card-title mb-0">Create New Test</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0 d-flex">
-                            <a href="{{ route('show') }}" class="btn btn-outline-primary ml-3" data-bs-toggle="tooltip"
-                                title="View all Tests">
+                            <a href="{{ route('test.index') }}" class="btn btn-outline-primary ml-3"
+                                data-bs-toggle="tooltip" title="View all Tests">
                                 <span>View</span>
                             </a>
                         </div>
@@ -34,7 +34,7 @@
 
                     <div class="card-body">
                         <div class="mx-auto w-75 mt-4">
-                            <form method="post" action="{{ route('store') }}">
+                            <form method="post" action="{{ route('test.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label>Name</label>

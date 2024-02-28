@@ -19,10 +19,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title mb-0">All Tests</h4>
+                            <h4 class="card-title mb-0">Edit Test</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0">
-                            <a href="{{ route('view', ['id' => $test->id]) }}"
+                            <a href="{{ route('test.view', ['id' => $test->id]) }}"
                                 class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon" data-bs-toggle="tooltip"
                                 title="View Test">
                                 <span>View</span>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="card-body">
                         <div class="mx-auto w-75">
-                            <form action="{{ route('update', ['id' => $test->id]) }}" method="POST">
+                            <form action="{{ route('test.update', ['id' => $test->id]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 {{-- {{ dd($test) }} --}}

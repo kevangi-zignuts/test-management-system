@@ -23,12 +23,12 @@
                             <h4 class="card-title mb-0">View Test</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0 d-flex">
-                            <a href="{{ route('show') }}" class="btn btn-outline-primary ml-3" data-bs-toggle="tooltip"
-                                title="View all Tests">
+                            <a href="{{ route('test.index') }}" class="btn btn-outline-primary ml-3"
+                                data-bs-toggle="tooltip" title="View all Tests">
                                 <span>View</span>
                             </a>
-                            <a href="{{ route('edit', ['id' => $test->id]) }}" class=" btn btn-outline-primary ml-3"
-                                data-bs-toggle="tooltip" title="Edit This Test">
+                            <a href="{{ route('test.edit', ['id' => $test->id]) }}"
+                                class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip" title="Edit This Test">
                                 <i class="btn-inner">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +38,8 @@
                                 </i>
                                 <span>Edit</span>
                             </a>
-                            <form action="{{ route('delete', ['id' => $test->id]) }}" method="post" class="ml-3">
+                            <form action="{{ route('test.delete', ['id' => $test->id]) }}" method="post"
+                                class="ml-3">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-primary"
@@ -67,7 +68,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('questions.show', ['id' => $test->id]) }}"
+                        <a href="{{ route('questions.index', ['id' => $test->id]) }}"
                             class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip" title="New Questions Add">
                             <i class="btn-inner">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"

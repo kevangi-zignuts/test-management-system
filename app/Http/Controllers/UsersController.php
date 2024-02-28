@@ -32,7 +32,12 @@ class UsersController extends Controller
 
     public function test($id){
         $questions = Question::where('test_id', $id)->get();
-        return view('user.test', ['questions' => $questions]);
+        if($questions->isEmpty()){
+            // dd('here');
+            return redirect()->back()->with('error', 'Question are not present in this Test');
+        }else{
+            return view('user.test', ['questions' => $questions]);
+        }
     }
 
     public function result(Request $request, $id){
@@ -80,20 +85,6 @@ class UsersController extends Controller
         return view('user.result', ['result' => $result]);
     }
 
-    // public function dashboard(){
-    //     $user_id = auth()->id();
-    //     $results = Result::where('user_id', $user_id)->get();
-    //     $total_test = $results->count();
-    //     $percentage = 0;
-    //     $result_table = [];
-    //     foreach($results as $key => $result){
-    //         $percentage += $result->percentage;
-    //         $test_id = $result->test_id;
-    //         $test = Test::findOrFail($test_id);
-    //         $result_table[$test->test_name][] = $result->percentage;
-    //     }
-    //     $average_percentage = round($percentage/$total_test, 2);
-    //     dd($result_table);
 
-    // }
+
 }

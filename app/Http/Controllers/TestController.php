@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Test;
+use App\Models\Question;
+
 
 class TestController extends Controller
 {
@@ -38,7 +40,7 @@ class TestController extends Controller
         $test->level = $request['level'];
         $test->save();
 
-        return redirect()->route('show')->with('success', 'Test inserted successfully');;
+        return redirect()->route('test.index')->with('success', 'Test inserted successfully');;
     }
 
 
@@ -47,9 +49,10 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function index()
     {
-        $tests = Test::all();
+        // $tests = Test::all();
+        $tests = Test::paginate(10);
         return view('admin.TestModule.index', ['tests' => $tests]);
     }
 
@@ -93,7 +96,7 @@ class TestController extends Controller
         ]);
         $test = Test::findOrFail($id);
         $test->update($request->only(['test_name', 'description', 'level']));
-        return redirect()->route('show')->with('success', 'Test updated successfully');
+        return redirect()->route('test.index')->with('success', 'Test updated successfully');
     }
 
     /**
@@ -104,11 +107,12 @@ class TestController extends Controller
      */
     public function delete($id)
     {
-        $data = Test::find($id);
-        if(!$data){
-            return redirect()->route('show')->with('fail', 'We can not found data');;
+        $test = Test::find($id);
+        if(!$test){
+            return redirect()->route('test.index')->with('fail', 'We can not found data');;
         }
-        $data->delete();
-        return redirect()->route('show')->with('success', 'Task deleted successfully');;
+        $test->delete();
+        return redirect()->route('test.index')->with('success', 'Task deleted successfully');;
     }
+
 }

@@ -8,6 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 </html>
@@ -19,14 +22,17 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title mb-0">All Tests</h4>
+                            <h4 class="card-title mb-0">Edit Question</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0">
-                            <a href="{{ route('questions.show', ['id' => $question->test_id]) }}"
+                            {{-- <a href="{{ route('questions.show', ['id' => $question->test_id]) }}"
                                 class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon" data-bs-toggle="tooltip"
                                 title="View Questions">
                                 <span>Back</span>
-                            </a>
+                            </a> --}}
+                            <a href="{{ route('questions.index', ['id' => $question->test_id]) }}"
+                                class="btn btn-primary btn-sm rounded-circle" data-bs-toggle="tooltip" title="Back"><i
+                                    class="fa-solid fa-arrow-left"></i></a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -62,8 +68,8 @@
                                     <option value="C">Option 3</option>
                                 </select>
                                 {{-- <input type="hidden" name="test_id" value="{{ $id }}"> --}}
-                                <button type="submit" class="btn btn-primary margin-top mt-3" name="add">Add
-                                    Question</button>
+                                <button type="submit" class="btn btn-primary margin-top mt-3" name="add">
+                                    <i class="fa-solid fa-plus"></i> Add Question</button>
                             </form>
                         </div>
                     </div>

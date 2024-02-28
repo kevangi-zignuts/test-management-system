@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('option2');
             $table->string('option3');
             $table->enum('answer',['A', 'B', 'C']);
+            // $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->foreignId('test_id')->constrained('tests')->nullable();
             $table->timestamps();
         });

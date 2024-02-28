@@ -9,18 +9,6 @@ use App\Models\Test;
 class QuestionController extends Controller
 {
     /**
-     * Show all the tests to add question.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $tests = Test::all();
-        return view('admin.test-index', ['tests' => $tests]);
-    }
-
-    /**
      * Show the form for adding a new question.
      *
      * @param  int  $id
@@ -56,23 +44,23 @@ class QuestionController extends Controller
         $question->test_id = $request['test_id'];
         $question->save();
 
-        return redirect()->route('create')->with('success', 'Test inserted successfully');;
+        return redirect()->route('questions.index', ['id' => $request['test_id']])->with('success', 'Question inserted successfully');;
     }
 
     /**
-     * Display the all the questions in the perticular test.
+     * Display the all the questions of the perticular test.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function index($id)
     {
         $questions = Question::where('test_id', $id)->get();
         return view('admin.question.index', ['questions' => $questions]);
     }
 
     /**
-     * Display the specified test.
+     * Display the specified question.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -83,7 +71,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified test.
+     * Show the form for editing the specified question.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -95,7 +83,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Update the specified test in storage.
+     * Update the specified question in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -113,11 +101,11 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $test_id = $question->test_id;
         $question->update($request->only(['question_name', 'option1', 'option2', 'option3']));
-        return redirect()->route('questions.show', ['id' => $test_id])->with('success', 'Test updated successfully');
+        return redirect()->route('questions.index', ['id' => $test_id])->with('success', 'Test updated successfully');
     }
 
     /**
-     * Remove the specified test from storage.
+     * Remove the specified question from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -126,10 +114,10 @@ class QuestionController extends Controller
     {
         $data = Question::find($id);
         if(!$data){
-            return redirect()->route('show')->with('fail', 'We can not found data');;
+            return redirect()->route('test.index')->with('fail', 'We can not found data');;
         }
         $test_id = $data->test_id;
         $data->delete();
-        return redirect()->route('questions.show', ['id' => $test_id])->with('success', 'Question deleted successfully');
+        return redirect()->route('questions.index', ['id' => $test_id])->with('success', 'Question deleted successfully');
     }
 }

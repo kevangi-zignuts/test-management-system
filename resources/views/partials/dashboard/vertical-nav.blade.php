@@ -591,7 +591,7 @@
         </ul>
     </li> --}}
     <li class="nav-item">
-        <a href="{{ route('show') }}" class="nav-link" role="button">
+        <a href="{{ route('test.index') }}" class="nav-link" role="button">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4"
@@ -603,7 +603,7 @@
                 </svg>
             </i>
             {{-- <span class="item-name">Admin</span> --}}
-            <span class="item-name">Tests</span>
+            <span class="item-name">Dashboard</span>
         </a>
         {{-- <a class="nav-link {{ activeRoute(route('role.permission.list')) }}"
             href="{{ route('role.permission.list') }}" target="_blank">
