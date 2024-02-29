@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
@@ -30,14 +32,16 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <th class="text-center">Question Name</th>
-                                        <th class="text-center">Option 1</th>
-                                        <th class="text-center">Option 2</th>
-                                        <th class="text-center">Option 3</th>
-                                        <th class="text-center">Answer</th>
-                                        <th class="text-center">Actions</th>
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-center">Question Name</th>
+                                            <th class="text-center">Option 1</th>
+                                            <th class="text-center">Option 2</th>
+                                            <th class="text-center">Option 3</th>
+                                            <th class="text-center">Answer</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($questions as $question)
@@ -56,30 +60,28 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div>
-                                                        <a href="{{ route('questions.view', ['id' => $question->id]) }}"
-                                                            class="ml-3" data-bs-toggle="tooltip"
-                                                            title="View Question"><i
-                                                                class="fa-solid fa-clipboard-question"></i></a>
-                                                        <a href="{{ route('questions.edit', ['id' => $question->id]) }}"
-                                                            data-bs-toggle="tooltip" title="Edit Question"><i
-                                                                class="fa-solid fa-pen-to-square"></i></a>
-                                                        <form
-                                                            action="{{ route('questions.delete', ['id' => $question->id]) }}"
-                                                            method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn-link"
-                                                                onclick="return confirm('Are you sure You want to delete Question')"
-                                                                style="border: none; background: none;"
-                                                                data-bs-toggle="tooltip" title="Delete Question"><i
-                                                                    class="fa-solid fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
+                                                    <a href="{{ route('questions.view', ['id' => $question->id]) }}"
+                                                        class="ml-3 text-success" data-bs-toggle="tooltip"
+                                                        title="View Question"><i
+                                                            class="fa-solid fa-clipboard-question"></i></a>
+                                                    <form
+                                                        action="{{ route('questions.delete', ['id' => $question->id]) }}"
+                                                        method="post" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-link"
+                                                            onclick="return confirm('Are you sure You want to delete Question')"
+                                                            style="border: none; background: none;"
+                                                            data-bs-toggle="tooltip" title="Delete Question"><i
+                                                                class="fa-solid fa-trash text-danger"></i></button>
+                                                    </form>
+                                                    <a href="{{ route('questions.edit', ['id' => $question->id]) }}"
+                                                        data-bs-toggle="tooltip" title="Edit Question"><i
+                                                            class="fa-solid fa-pen-to-square text-info"></i></a>
                                                 </td>
                                             </tr>
                                             @php
-                                                $test_id = $question->id;
+                                                $test_id = $question->test_id;
                                             @endphp
                                         @endforeach
                                     </tbody>

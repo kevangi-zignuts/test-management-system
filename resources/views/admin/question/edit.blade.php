@@ -37,7 +37,8 @@
                     </div>
                     <div class="card-body">
                         <div class="mx-auto w-75">
-                            <form action="{{ route('questions.update', ['id' => $question->id]) }}" method="POST">
+                            <form action="{{ route('questions.update', ['id' => $question->id]) }}" method="POST"
+                                class="text-black">
                                 @csrf
                                 @method('PUT')
 
@@ -69,7 +70,7 @@
                                 </select>
                                 {{-- <input type="hidden" name="test_id" value="{{ $id }}"> --}}
                                 <button type="submit" class="btn btn-primary margin-top mt-3" name="add">
-                                    <i class="fa-solid fa-plus"></i> Add Question</button>
+                                    <i class="fa-solid fa-plus"></i> Update Question</button>
                             </form>
                         </div>
                     </div>

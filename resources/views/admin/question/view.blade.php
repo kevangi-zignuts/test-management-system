@@ -53,12 +53,36 @@
 
                     <div class="card-body">
                         <div class="mx-auto w-75">
-                            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-                                <h3 class="h3"> Question :- {{ $question->question_name }}</h3>
-                                <h5 class="h4"> Option A :- {{ $question->option1 }}</h5>
-                                <h5 class="h4"> Option B :- {{ $question->option2 }}</h5>
-                                <h5 class="h4"> Option C :- {{ $question->option3 }}</h5>
-                                <h5 class="h4 text-success"> Answer :- {{ $question->answer }}</h5>
+                            <div class="card shadow-lg p-3 mb-5 rounded ">
+                                <p class="h4"> Q. {{ $question->question_name }}</p>
+                                {{-- <div class="card"> --}}
+                                <div class="card-body border border-dark rounded p-0 m-4 mb-0">
+                                    {{-- This is some text within a card body. --}}
+                                    <p class="m-2 text-dark h5"> A.{{ $question->option1 }}</p>
+                                </div>
+                                <div class="card-body border border-dark rounded p-0 m-4 mb-0">
+                                    {{-- This is some text within a card body. --}}
+                                    <p class="m-2 text-dark h5"> B. {{ $question->option2 }}</p>
+                                </div>
+                                <div class="card-body border border-dark rounded p-0 m-4 mb-0">
+                                    {{-- This is some text within a card body. --}}
+                                    <p class="m-2 text-dark h5"> C. {{ $question->option3 }}</p>
+                                </div>
+                                <div class="card-body border border-success rounded p-0 m-4 bg-success">
+                                    {{-- This is some text within a card body. --}}
+                                    @if ($question->answer === 'A')
+                                        <p class=" m-2 text-white h5"> Answer :-
+                                            {{ $question->answer . ') ' . $question->option1 }} </p>
+                                    @elseif ($question->answer === 'B')
+                                        <p class=" m-2 text-white h5"> Answer :-
+                                            {{ $question->answer . ') ' . $question->option2 }} </p>
+                                    @elseif ($question->answer === 'C')
+                                        <p class=" m-2 text-white h5"> Answer :-
+                                            {{ $question->answer . ') ' . $question->option1 }} </p>
+                                    @endif
+
+                                </div>
+                                {{-- </div> --}}
 
                             </div>
                         </div>

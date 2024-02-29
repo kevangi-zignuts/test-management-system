@@ -15,6 +15,16 @@ class HomeController extends Controller
         return view('dashboards.dashboard', compact('assets'));
     }
 
+    public function dashboard(){
+        if(auth()->user()->user_type == 'admin'){
+            $assets = ['chart', 'animation'];
+            return view('dashboards.dashboard', compact('assets'));
+        }else{
+            $assets = ['chart', 'animation'];
+            return view('user.dashboard', compact('assets'));
+        }
+    }
+
     /*
      * Menu Style Routs
      */

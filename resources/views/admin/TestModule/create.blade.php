@@ -8,6 +8,9 @@
     <title>Create Test</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -25,14 +28,13 @@
                             <h4 class="card-title mb-0">Create New Test</h4>
                         </div>
                         <div class="text-center ms-3 ms-lg-0 ms-md-0 d-flex">
-                            <a href="{{ route('test.index') }}" class="btn btn-outline-primary ml-3"
-                                data-bs-toggle="tooltip" title="View all Tests">
-                                <span>View</span>
+                            <a href="{{ route('test.index') }}" class="btn btn-primary ml-3 btn-sm rounded-circle"
+                                data-bs-toggle="tooltip" title="View all Tests"><i class="fa-solid fa-arrow-left"></i>
                             </a>
                         </div>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body text-black">
                         <div class="mx-auto w-75 mt-4">
                             <form method="post" action="{{ route('test.store') }}">
                                 @csrf
@@ -50,7 +52,8 @@
                                     <option value="Medium">Medium</option>
                                     <option value="Low">Low</option>
                                 </select>
-                                <button type="submit" class="btn btn-primary mt-3" name="create">Create Test</button>
+                                <button type="submit" class="btn btn-primary mt-3" name="create">Create
+                                    Test</button>
                             </form>
                         </div>
                     </div>

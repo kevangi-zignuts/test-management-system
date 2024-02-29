@@ -8,6 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 </html>
@@ -21,9 +24,12 @@
                         <div class="header-title">
                             <h4 class="card-title mb-0">Add New Question</h4>
                         </div>
+                        <a href="{{ route('questions.index', ['id' => $id]) }}"
+                            class="btn btn-primary btn-sm rounded-circle" data-bs-toggle="tooltip" title="Back"><i
+                                class="fa-solid fa-arrow-left"></i></a>
                     </div>
                     <div class="card-body">
-                        <div class="mx-auto w-75">
+                        <div class="mx-auto w-75 text-black">
                             <form method="post" action="{{ route('questions.store') }}">
                                 @csrf
                                 <div class="form-group">

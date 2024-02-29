@@ -109,10 +109,10 @@ class TestController extends Controller
     {
         $test = Test::find($id);
         if(!$test){
-            return redirect()->route('test.index')->with('fail', 'We can not found data');;
+            return redirect()->route('test.index')->with('fail', 'We can not found data');
         }
         $test->delete();
-        return redirect()->route('test.index')->with('success', 'Task deleted successfully');;
+        return redirect()->route('test.index')->with('success', 'Task deleted successfully');
     }
 
 }

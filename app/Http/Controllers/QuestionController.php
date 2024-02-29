@@ -101,7 +101,7 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $test_id = $question->test_id;
         $question->update($request->only(['question_name', 'option1', 'option2', 'option3']));
-        return redirect()->route('questions.index', ['id' => $test_id])->with('success', 'Test updated successfully');
+        return redirect()->route('questions.index', ['id' => $test_id])->with('success', 'Question updated successfully');
     }
 
     /**

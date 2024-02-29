@@ -67,12 +67,6 @@ Route::group(['middleware' => 'auth'], function () {
     // Users Module
     Route::resource('users', UserController::class);
 
-    // Route::group(['prefix' => 'admin'], function(){
-    //     Route::get('/login', [AdminController::class, 'showLoginForm']);
-    //     Route::post('/login', [AdminController::class, 'login']);
-    //     Route::post('/logout', [AdminController::class, 'logout']);
-    // });
-
     // Admin Page rotes
     Route::group(['prefix' => 'admin'], function(){
         //Test Page Routes
@@ -185,3 +179,6 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
 
 
+// Route::get('/sample', function(){
+//     view('dashboards.dashboard2');
+// });

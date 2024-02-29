@@ -10,8 +10,7 @@
     </div>
 
     <div class="conatiner-fluid content-inner mt-n5 py-0">
-        {{-- {{ $slot }} --}}
-        @include('user.index')
+        {{ $slot }}
     </div>
 
     {{-- @include('partials.dashboard._body_footer') --}}

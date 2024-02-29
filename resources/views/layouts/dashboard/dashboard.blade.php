@@ -14,7 +14,11 @@
 </head>
 
 <body class="">
-    @include('partials.dashboard._body')
+    @if (Auth::user()->user_type === 'admin')
+        @include('partials.dashboard._body')
+    @else
+        @include('user.components._body')
+    @endif
     <a class="btn btn-fixed-end btn-secondary btn-icon btn-dashboard" href="../landing-pages/index">Landing Pages</a>
 </body>
 
