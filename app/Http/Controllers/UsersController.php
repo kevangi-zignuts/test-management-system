@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Question;
 use App\Models\Result;
+use App\Models\UserTest;
 
 class UsersController extends Controller
 {
@@ -13,29 +14,19 @@ class UsersController extends Controller
      * Display Dashboard of the perticular user
      */
     public function index(){
-        $tests = Test::all();
+        $tests                = Test::all();
+        $userId               = auth()->id();
+        $results              = Result::with('test')->where('user_id', $userId)->get();
+        $total_test           = $results->count();
+        // $results              = $results->paginate(10);
+        $totalSumOfPercentage = Result::where('user_id', $userId)->sum('percentage');
+        if($total_test != 0){
+            $average_percentage = round(($totalSumOfPercentage/$total_test), 2);
+        }else{
+            $average_percentage = 0;
+        }
 
-        $user_id = auth()->id();
-        // $results = Result::where('user_id', $user_id)->get();
-        $results = Result::with('test')->where('user_id', $user_id);
-        $total_test = $results->count();
-       // $total_test = Result::where('user_id', $user_id)->count();
-
-        $results = $results->paginate(10);
-
-        // $percentage = 0;
-        // $result_table = [];
-        // foreach($results as $key => $result){
-        //     $percentage += $result->percentage;
-        //     $test_id = $result->test_id;
-        //     $test = Test::findOrFail($test_id);
-        //     $result_table[$test->test_name][] = $result->percentage;
-        // }
-
-        // $average_percentage = round(($percentage/$total_test), 2);
-        dd($results);
-        // dd($result_table);
-        return view('user.dashboard', ['tests' => $tests, 'total_test' => $total_test, 'percentage' => $average_percentage, 'result_table' => $result_table, 'results' => $results]);
+        return view('user.dashboard', ['tests' => $tests, 'total_test' => $total_test, 'percentage' => $average_percentage, 'results' => $results]);
     }
 
     /**
@@ -44,11 +35,9 @@ class UsersController extends Controller
     public function test($id){
         $questions = Question::where('test_id', $id)->get();
         if($questions->isEmpty()){
-            // dd('here');
             return redirect()->back()->with('error', 'Question are not present in this Test');
-        }else{
-            return view('user.test', ['questions' => $questions]);
         }
+        return view('user.test', ['questions' => $questions]);
     }
 
     /**
@@ -67,16 +56,20 @@ class UsersController extends Controller
         //     return redirect()->back()->with('error', 'Some of the question are remain to fill');
         // }
 
+        $request->validate([
+            'test' => "required",
+        ]);
+
+
         $correct_question = 0;
         foreach ($request->test as $key => $test) {
             $questionId = $test['question'];
             if (!isset($test['answer']) || !$test['answer']) {
                 return redirect()->back()->with('error-question', 'Some of the question are remain to fill');
             }
-            $userAnswer = $test['answer'];
 
-            // dd($questions);
-            $question = $questions->where('id', $questionId)->first();
+            $userAnswer = $test['answer'];
+            $question   = $questions->where('id', $questionId)->first();
             if($test['answer'] === $question->answer)
             {
                 $correct_question++;
@@ -85,14 +78,26 @@ class UsersController extends Controller
 
         $percentage = round(($correct_question/$questions->count()) * 100, 2);
 
-        $result = new Result;
-        $result->test_id = $id;
-        $result->user_id = auth()->id();
-        $result->total_que = $questions->count();
-        $result->right_que = $correct_question;
-        $result->percentage = $percentage;
-        $result->save();
-        // dd('here');
+        $result = Result::create([
+            'test_id'    => $id,
+            'user_id'    => auth()->id(),
+            'total_que'  => $questions->count(),
+            'right_que'  => $correct_question,
+            'percentage' => $percentage,
+        ]);
+        $resultId = $result->id;
+        // dd($result->id);
+        foreach ($request->test as $key => $test){
+            $questionId = $test['question'];
+            $userTest = UserTest::create([
+                'user_id'     => auth()->id(),
+                'test_id'     => $id,
+                'question_id' => $questionId,
+                'result_id'   => $resultId,
+                'option'      => $test['answer'],
+            ]);
+        }
+
         $result = [
             'total_question' => $questions->count(),
             'correct_answer' => $correct_question,
@@ -102,5 +107,14 @@ class UsersController extends Controller
         return view('user.result', ['result' => $result]);
     }
 
+    public function view($id){
+        $submittedTests = UserTest::with('question')->where('result_id', $id)->get();
 
+        // dd($submittedTests);
+        return view('user.viewSubmittedTest', ['submittedTests' => $submittedTests]);
+    }
 }
+
+
+
+

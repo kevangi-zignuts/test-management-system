@@ -32,17 +32,17 @@ class QuestionController extends Controller
             'option1' => "required",
             'option2' => "required",
             'option3' => "required",
-            'answer' => "required",
+            'answer'  => "required",
         ]);
 
-        $question = new Question;
-        $question->question_name = $request['question_name'];
-        $question->option1 = $request['option1'];
-        $question->option2 = $request['option2'];
-        $question->option3 = $request['option3'];
-        $question->answer = $request['answer'];
-        $question->test_id = $request['test_id'];
-        $question->save();
+        $question = Question::create([
+            'question_name' => $request['question_name'],
+            'option1'       => $request['option1'],
+            'option2'       => $request['option2'],
+            'option3'       => $request['option3'],
+            'answer'        => $request['answer'],
+            'test_id'       => $request['test_id'],
+        ]);
 
         return redirect()->route('questions.index', ['id' => $request['test_id']])->with('success', 'Question inserted successfully');;
     }
@@ -93,13 +93,14 @@ class QuestionController extends Controller
     {
         $request->validate([
             'question_name' => "required",
-            'option1' => "required",
-            'option2' => "required",
-            'option3' => "required",
-            'answer' => "required",
+            'option1'       => "required",
+            'option2'       => "required",
+            'option3'       => "required",
+            'answer'        => "required",
         ]);
         $question = Question::findOrFail($id);
-        $test_id = $question->test_id;
+        $test_id  = $question->test_id;
+
         $question->update($request->only(['question_name', 'option1', 'option2', 'option3']));
         return redirect()->route('questions.index', ['id' => $test_id])->with('success', 'Question updated successfully');
     }

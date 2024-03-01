@@ -45,13 +45,13 @@
                     $id = $questions->first()->test_id;
                     $i = 1;
                 @endphp
-                <form action="{{ route('user.result', ['id' => $id]) }}" method="POST" id="questionForm">
+                <form action="{{ route('user.result', ['id' => $id]) }}" method="POST">
                     @csrf
 
                     <div class="questions m-3">
                         <div class="question m-2">
-                            @foreach ($questions as $question)
-                                <fieldset class="form-group">
+                            @foreach ($questions as $key => $question)
+                                <div class="form-group" style="display: {{ $key === 0 ? 'block' : 'none' }}">
                                     <input type="hidden" name="test[{{ $question->id }}][question]"
                                         value="{{ $question->id }}">
                                     <div class="options">
@@ -72,7 +72,7 @@
                                             <p class="m-2 text-secondary h5"> {{ 'C) ' . $question->option3 }}</p>
                                         </div>
                                     </div>
-                                </fieldset>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -81,10 +81,14 @@
                             {{ session('error-question') }}
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-success btn-lg ml-4">Submit</button>
+                    <div class="d-flex">
+                        <button type="submit" id="btnSubmit" class="btn btn-success ml-3"
+                            style="display: none">Submit</button>
+                        <button type="button" class="btn btn-primary btn-prev ml-3"
+                            style="display: none">Previous</button>
+                        <button type="button" class="btn btn-primary btn-next ml-3">Next</button>
+                    </div>
                 </form>
-                <button onclick="previousQuestion()">Previous</button>
-                <button onclick="nextQuestion()">Next</button>
             </div>
         </div>
     </section>
@@ -94,28 +98,63 @@
             document.getElementById('error-alert').style.display = 'none';
         }, 3000);
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const fieldsets = document.querySelectorAll('.form-group');
+            const btnPrev = document.querySelector('.btn-prev');
+            const btnNext = document.querySelector('.btn-next');
+            const btnSubmit = document.getElementById('btnSubmit');
+            let currentQuestionIndex = 0;
 
+            // Check if fieldsets exist and are not empty
+            if (fieldsets.length > 0) {
+                fieldsets[currentQuestionIndex].style.display = 'block';
+            } else {
+                console.error('No elements with class "form-group" found.');
+                return; // Stop execution if no elements are found
+            }
 
-        const form = document.getElementById('questionForm');
-        const fieldsets = form.querySelectorAll('fieldset');
-        let currentQuestionIndex = 0;
-        fieldsets.style, display = 0 ? 'block' : 'none';
+            function toggleButtons() {
+                if (currentQuestionIndex === 0) {
+                    btnPrev.style.display = 'none';
+                } else {
+                    btnPrev.style.display = 'block';
+                }
 
-        function showQuestion(index) {
-            fieldsets.forEach((fieldset, i) => {
-                fieldset.style.display = i === index ? 'block' : 'none';
+                if (currentQuestionIndex === fieldsets.length - 1) {
+                    btnNext.style.display = 'none';
+                    btnSubmit.style.display = 'block';
+                } else {
+                    btnNext.style.display = 'block';
+                    btnSubmit.style.display = 'none';
+                }
+            }
+
+            btnNext.addEventListener('click', function() {
+                if (fieldsets[currentQuestionIndex]) {
+                    fieldsets[currentQuestionIndex].style.display = 'none';
+                    currentQuestionIndex++;
+                    if (fieldsets[currentQuestionIndex]) {
+                        fieldsets[currentQuestionIndex].style.display = 'block';
+                    }
+                    toggleButtons();
+                } else {
+                    console.error('Element at index ' + currentQuestionIndex + ' not found.');
+                }
             });
-        }
 
-        function previousQuestion() {
-            currentQuestionIndex = (currentQuestionIndex - 1 + fieldsets.length) % fieldsets.length;
-            showQuestion(currentQuestionIndex);
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex = (currentQuestionIndex + 1 + fieldsets.length) % fieldsets.length;
-            showQuestion(currentQuestionIndex);
-        }
+            btnPrev.addEventListener('click', function() {
+                if (fieldsets[currentQuestionIndex]) {
+                    fieldsets[currentQuestionIndex].style.display = 'none';
+                    currentQuestionIndex--;
+                    if (fieldsets[currentQuestionIndex]) {
+                        fieldsets[currentQuestionIndex].style.display = 'block';
+                    }
+                    toggleButtons();
+                } else {
+                    console.error('Element at index ' + currentQuestionIndex + ' not found.');
+                }
+            });
+        });
     </script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>

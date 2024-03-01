@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Question;
+use App\Models\User;
 
 
 class TestController extends Controller
@@ -29,16 +30,16 @@ class TestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'test_name' => "required",
+            'test_name'   => "required",
             'description' => "required",
-            'level' => "required",
+            'level'       => "required",
         ]);
 
-        $test = new Test;
-        $test->test_name = $request['test_name'];
-        $test->description = $request['description'];
-        $test->level = $request['level'];
-        $test->save();
+        $test = Test::create([
+            'test_name'   => $request['test_name'],
+            'description' => $request['description'],
+            'level'       => $request['level'],
+        ]);
 
         return redirect()->route('test.index')->with('success', 'Test inserted successfully');;
     }
@@ -90,9 +91,9 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'test_name' => "required",
+            'test_name'   => "required",
             'description' => "required",
-            'level' => "required",
+            'level'       => "required",
         ]);
         $test = Test::findOrFail($id);
         $test->update($request->only(['test_name', 'description', 'level']));
@@ -115,4 +116,12 @@ class TestController extends Controller
         return redirect()->route('test.index')->with('success', 'Task deleted successfully');
     }
 
+    /**
+     * Show the admin Dashboard.
+     */
+    public function dashboard(){
+        $totalUsers = User::where('user_type', 'user')->count();
+        $totalTests = Test::count();
+        return view('admin.dashboard', ['totalUsers' => $totalUsers, 'totalTests' => $totalTests]);
+    }
 }

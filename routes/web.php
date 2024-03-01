@@ -69,6 +69,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Admin Page rotes
     Route::group(['prefix' => 'admin'], function(){
+        //Dashboard Page Route
+        Route::get('/dashboard', [TestController::class, 'dashboard'])->name('admin.dashboard');
+
         //Test Page Routes
         Route::group(['prefix' => 'test'], function(){
             Route::get('/index', [TestController::class, 'index'])->name('test.index');
@@ -97,6 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/index', [UsersController::class, 'index'])->name('user.index');
         Route::get('/test/{id}', [UsersController::class, 'test'])->name('user.test');
         Route::post('/result/{id}', [UsersController::class, 'result'])->name('user.result');
+        Route::get('/view/{id}', [UsersController::class, 'view'])->name('user.view');
     });
 });
 
