@@ -33,7 +33,7 @@
                                         </p>
                                         @if ($submittedTest->question->answer === 'A')
                                             <div
-                                                class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-info">
+                                                class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-success">
                                                 <p class="m-2 text-secondary h5">
                                                     {{ 'A) ' . $submittedTest->question->option1 }}</p>
                                             </div>
@@ -46,7 +46,7 @@
 
                                         @if ($submittedTest->question->answer === 'B')
                                             <div
-                                                class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-info">
+                                                class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-success">
                                                 <p class="m-2 text-secondary h5 ">
                                                     {{ 'B) ' . $submittedTest->question->option2 }}</p>
                                             </div>
@@ -59,7 +59,7 @@
 
                                         @if ($submittedTest->question->answer === 'C')
                                             <div
-                                                class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-info">
+                                                class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-success">
                                                 <p class="m-2 text-secondary h5">
                                                     {{ 'C) ' . $submittedTest->question->option3 }}</p>
                                             </div>
@@ -70,8 +70,8 @@
                                             </div>
                                         @endif
                                         <div
-                                            class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-success">
-                                            <p class="m-2 text-secondary h5">Users Answer :-
+                                            class="card-body border border-secondary rounded p-0 d-flex mb-2 bg-soft-info">
+                                            <p class="m-2 text-secondary h5">Your Answer :-
                                                 {{ $submittedTest->option }} </p>
                                         </div>
                                     </div>

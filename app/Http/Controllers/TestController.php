@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Question;
 use App\Models\User;
+use App\Models\UserTest;
 
 
 class TestController extends Controller
@@ -116,6 +117,20 @@ class TestController extends Controller
         if(!$test){
             return redirect()->route('test.index')->with('fail', 'We can not found data');
         }
+        // $questions = Question::where('test_id', $id)->get();
+        // if ($questions->isNotEmpty()) {
+        //     foreach ($questions as $question) {
+        //         $results = Result::where('question_id', $question->id)->get();
+        //         if ($results->isNotEmpty()) {
+        //             foreach ($results as $result) {
+        //                 UserTest::where('result_id', $result->id)->delete();
+        //                 $result->delete();
+        //             }
+        //         }
+        //         $question->delete();
+        //     }
+        //     dd('here');
+        // }
         $test->delete();
         return redirect()->route('test.index')->with('success', 'Task deleted successfully');
     }

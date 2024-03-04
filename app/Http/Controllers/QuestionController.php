@@ -59,7 +59,11 @@ class QuestionController extends Controller
     public function index($id)
     {
         $questions = Question::where('test_id', $id)->get();
-        return view('admin.question.index', ['questions' => $questions]);
+        if($questions->isNotEmpty()){
+            return view('admin.question.index', ['questions' => $questions]);
+        }
+        $test = Test::findOrFail($id);
+        return view('admin.TestModule.view', ['test' => $test, 'error' => 'Questions not available in this test']);
     }
 
     /**

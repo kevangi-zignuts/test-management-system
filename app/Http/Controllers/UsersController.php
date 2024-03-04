@@ -7,6 +7,7 @@ use App\Models\Test;
 use App\Models\Question;
 use App\Models\Result;
 use App\Models\UserTest;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -16,16 +17,19 @@ class UsersController extends Controller
     public function index(Request $request){
         $tests                = Test::all();
         $userId               = auth()->id();
-        // $results              = Result::with('test')->where('user_id', $userId)->get();
-        $startDate           = $request->input('start_date');
-        $endDate             = $request->input('end_date');
-        $results              = Result::with('test')
-                                        ->where('user_id', $userId)
-                                        ->whereBetween('created_at', [$startDate, $endDate])
-                                        ->get();
+        $results              = Result::with('test')->where('user_id', $userId)->latest('created_at');
+        if($request->filled(['start_date', 'end_date'])){
+            $startDate           = Carbon::parse($request->start_date);
+            $endDate             = Carbon::parse($request->end_date);
+            $results             = Result::whereBetween('created_at', [$startDate, $endDate]);
+        }
+        // $results              = Result::with('test')
+        //                                 ->where('user_id', $userId)
+        //                                 ->whereBetween('created_at', [$startDate, $endDate])
+        //                                 ->get();
         $result               = Result::with('test')->where('user_id', $userId);
         $total_test           = $result->count();
-        // $results              = $results->paginate(10);
+        $results              = $results->paginate(5);
         $totalSumOfPercentage = Result::where('user_id', $userId)->sum('percentage');
         if($total_test != 0){
             $average_percentage = round(($totalSumOfPercentage/$total_test), 2);

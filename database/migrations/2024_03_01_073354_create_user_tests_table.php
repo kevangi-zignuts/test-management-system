@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->nullable();
-            $table->foreignId('test_id')->constrained('tests')->nullable();
+            $table->unsignedBigInteger('test_id')->constrained('questions')->nullable();
             $table->foreignId('question_id')->constrained('questions')->nullable();
             $table->foreignId('result_id')->constrained('results')->nullable();
             $table->enum('option',['A', 'B', 'C']);

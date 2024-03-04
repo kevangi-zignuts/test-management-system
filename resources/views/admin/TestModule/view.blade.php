@@ -72,7 +72,11 @@
                             <i class="fa-solid fa-plus"></i>
                             <span>Add Question</span>
                         </a>
-
+                        @if (session('error'))
+                            <div id="error-alert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
 

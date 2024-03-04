@@ -51,7 +51,13 @@
                                                 <td>{{ $question->option2 }}</td>
                                                 <td>{{ $question->option3 }}</td>
                                                 <td>
-                                                    {{ $question->option1 }}
+                                                    @if ($question->answer === 'A')
+                                                        {{ $question->option1 }}
+                                                    @elseif ($question->answer === 'B')
+                                                        {{ $question->option2 }}
+                                                    @else
+                                                        {{ $question->option3 }}
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('questions.view', ['id' => $question->id]) }}"
