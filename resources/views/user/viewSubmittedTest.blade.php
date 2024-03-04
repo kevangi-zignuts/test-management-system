@@ -99,6 +99,11 @@
             // Check if fieldsets exist and are not empty
             if (fieldsets.length > 0) {
                 fieldsets[currentQuestionIndex].style.display = 'block';
+                if (fieldsets.length === 1) {
+                    btnPrev.style.display = 'none';
+                    btnNext.style.display = 'none';
+                    btnSubmit.style.display = 'block';
+                }
             } else {
                 console.error('No elements with class "form-group" found.');
                 return; // Stop execution if no elements are found
