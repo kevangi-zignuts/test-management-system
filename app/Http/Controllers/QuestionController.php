@@ -33,6 +33,9 @@ class QuestionController extends Controller
             'option2' => "required",
             'option3' => "required",
             'answer'  => "required",
+            'test_id' => "required|exists:tests,id",
+        ],[
+            'required' => 'All fields are required.',
         ]);
 
         $question = Question::create([
@@ -97,6 +100,8 @@ class QuestionController extends Controller
             'option2'       => "required",
             'option3'       => "required",
             'answer'        => "required",
+        ], [
+            'required' => 'All fields are required.',
         ]);
         $question = Question::findOrFail($id);
         $test_id  = $question->test_id;

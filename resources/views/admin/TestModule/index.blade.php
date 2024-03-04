@@ -66,7 +66,8 @@
                                                     <div class=" gap-2">
                                                         <a href="{{ route('test.view', ['id' => $test->id]) }} "
                                                             data-bs-toggle="tooltip" title="View Test"><i
-                                                                class="fa-solid fa-clipboard-question text-success"></i></a>
+                                                                class="fa fa-eye text-success"
+                                                                aria-hidden="true"></i></a>
                                                         <form action="{{ route('test.delete', ['id' => $test->id]) }}"
                                                             method="post" class="d-inline pl-0">
                                                             @csrf
@@ -77,9 +78,10 @@
                                                                 data-bs-toggle="tooltip" title="Delete Test"><i
                                                                     class="fa-solid fa-trash text-danger pl-lg-5"></i></button>
                                                         </form>
-                                                        <a href="{{ route('test.edit', ['id' => $test->id]) }}"
-                                                            data-bs-toggle="tooltip" title="Edit Test Details"><i
-                                                                class="fa-solid fa-pen-to-square text-info pl-lg-5"></i></a>
+                                                        <a href="{{ route('test.edit', ['id' => $test->id]) }}"><i
+                                                                class="fa-solid fa-pen-to-square text-info pl-lg-5"
+                                                                data-bs-toggle="tooltip"
+                                                                title="Edit Test Details"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

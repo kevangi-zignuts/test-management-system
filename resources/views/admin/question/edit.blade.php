@@ -72,6 +72,15 @@
                                 <button type="submit" class="btn btn-primary margin-top mt-3" name="add">
                                     <i class="fa-solid fa-plus"></i> Update Question</button>
                             </form>
+                            {{-- @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif --}}
                         </div>
                     </div>
                 </div>

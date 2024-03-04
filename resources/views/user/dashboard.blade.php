@@ -57,6 +57,23 @@
                                     </div>
                                 </div>
 
+                                <form method="GET" action="{{ route('user.index') }}">
+                                    <div class="form-row w-100">
+                                        <div class="col-md-3 d-flex">
+                                            <label for="start_date">Start Date:</label>
+                                            <input type="date" class="form-control" name="start_date"
+                                                id="start_date">
+                                        </div>
+                                        <div class="col-md-3 d-flex">
+                                            <label for="end_date">End Date:</label>
+                                            <input type="date" class="form-control" name="end_date" id="end_date">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </form>
+
                                 <table class="table text-center">
                                     <thead class="thead-dark">
                                         <tr>
@@ -73,7 +90,7 @@
                                                 <td>{{ $result->test->test_name }}</td>
                                                 <td>{{ $result->percentage }}</td>
                                                 <td><a href="{{ route('user.view', ['id' => $result->id]) }}"><i
-                                                            class="fa-solid fa-clipboard-question text-success"
+                                                            class="fa fa-eye text-success" aria-hidden="true"
                                                             style="font-size: 25px"></i></a>
                                                 </td>
                                             </tr>

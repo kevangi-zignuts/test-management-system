@@ -33,6 +33,8 @@ class TestController extends Controller
             'test_name'   => "required",
             'description' => "required",
             'level'       => "required",
+        ],[
+            'required' => 'All fields are required.',
         ]);
 
         $test = Test::create([
@@ -45,7 +47,7 @@ class TestController extends Controller
     }
 
 
-     /**
+    /**
      * Display the all the tests.
      *
      * @return \Illuminate\Http\Response
@@ -57,7 +59,7 @@ class TestController extends Controller
         return view('admin.TestModule.index', ['tests' => $tests]);
     }
 
-     /**
+    /**
      * Display the specified test.
      *
      * @param  int  $id
@@ -68,7 +70,7 @@ class TestController extends Controller
         return view('admin.TestModule.view', compact('test'));
     }
 
-     /**
+    /**
      * Show the form for editing the specified test.
      *
      * @param  int  $id
@@ -94,6 +96,8 @@ class TestController extends Controller
             'test_name'   => "required",
             'description' => "required",
             'level'       => "required",
+        ],[
+            'required' => 'All fields are required.',
         ]);
         $test = Test::findOrFail($id);
         $test->update($request->only(['test_name', 'description', 'level']));

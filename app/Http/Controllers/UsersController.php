@@ -13,11 +13,18 @@ class UsersController extends Controller
     /**
      * Display Dashboard of the perticular user
      */
-    public function index(){
+    public function index(Request $request){
         $tests                = Test::all();
         $userId               = auth()->id();
-        $results              = Result::with('test')->where('user_id', $userId)->get();
-        $total_test           = $results->count();
+        // $results              = Result::with('test')->where('user_id', $userId)->get();
+        $startDate           = $request->input('start_date');
+        $endDate             = $request->input('end_date');
+        $results              = Result::with('test')
+                                        ->where('user_id', $userId)
+                                        ->whereBetween('created_at', [$startDate, $endDate])
+                                        ->get();
+        $result               = Result::with('test')->where('user_id', $userId);
+        $total_test           = $result->count();
         // $results              = $results->paginate(10);
         $totalSumOfPercentage = Result::where('user_id', $userId)->sum('percentage');
         if($total_test != 0){

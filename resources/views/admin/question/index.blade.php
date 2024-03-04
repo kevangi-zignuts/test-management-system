@@ -51,19 +51,13 @@
                                                 <td>{{ $question->option2 }}</td>
                                                 <td>{{ $question->option3 }}</td>
                                                 <td>
-                                                    @if ($question->answer === 'A')
-                                                        A. {{ $question->option1 }}
-                                                    @elseif ($question->answer === 'B')
-                                                        B. {{ $question->option2 }}
-                                                    @else
-                                                        C. {{ $question->option3 }}
-                                                    @endif
+                                                    {{ $question->option1 }}
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('questions.view', ['id' => $question->id]) }}"
                                                         class="ml-3 text-success" data-bs-toggle="tooltip"
-                                                        title="View Question"><i
-                                                            class="fa-solid fa-clipboard-question"></i></a>
+                                                        title="View Question"><i class="fa fa-eye"
+                                                            aria-hidden="true"></i></a>
                                                     <form
                                                         action="{{ route('questions.delete', ['id' => $question->id]) }}"
                                                         method="post" class="d-inline">
@@ -81,12 +75,12 @@
                                                 </td>
                                             </tr>
                                             @php
-                                                $test_id = $question->test_id;
+                                                $id = $question->test_id;
                                             @endphp
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <a href="{{ route('questions.create', ['id' => $test_id]) }}"
+                                <a href="{{ route('questions.create', ['id' => $id]) }}"
                                     class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon" data-bs-toggle="tooltip"
                                     title="Add New Question">
                                     <i class="btn-inner">
