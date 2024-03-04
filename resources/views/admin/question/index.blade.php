@@ -86,6 +86,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                {{ $questions->links('pagination::bootstrap-5') }}
                                 <a href="{{ route('questions.create', ['id' => $id]) }}"
                                     class="mt-lg-0 mt-md-0 mt-3 btn btn-primary btn-icon" data-bs-toggle="tooltip"
                                     title="Add New Question">

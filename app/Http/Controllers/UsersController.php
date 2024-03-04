@@ -23,10 +23,7 @@ class UsersController extends Controller
             $endDate             = Carbon::parse($request->end_date);
             $results             = Result::whereBetween('created_at', [$startDate, $endDate]);
         }
-        // $results              = Result::with('test')
-        //                                 ->where('user_id', $userId)
-        //                                 ->whereBetween('created_at', [$startDate, $endDate])
-        //                                 ->get();
+        $results->appends($request->except('page'));
         $result               = Result::with('test')->where('user_id', $userId);
         $total_test           = $result->count();
         $results              = $results->paginate(5);

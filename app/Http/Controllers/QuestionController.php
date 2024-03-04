@@ -58,7 +58,8 @@ class QuestionController extends Controller
      */
     public function index($id)
     {
-        $questions = Question::where('test_id', $id)->get();
+        $questions              = Question::where('test_id', $id);
+        $questions              = $questions->paginate(5);
         if($questions->isNotEmpty()){
             return view('admin.question.index', ['questions' => $questions]);
         }
@@ -110,7 +111,7 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $test_id  = $question->test_id;
 
-        $question->update($request->only(['question_name', 'option1', 'option2', 'option3']));
+        $question->update($request->only(['question_name', 'option1', 'option2', 'option3', 'answer']));
         return redirect()->route('questions.index', ['id' => $test_id])->with('success', 'Question updated successfully');
     }
 

@@ -56,7 +56,7 @@ class TestController extends Controller
     public function index()
     {
         // $tests = Test::all();
-        $tests = Test::paginate(10);
+        $tests = Test::paginate(5);
         return view('admin.TestModule.index', ['tests' => $tests]);
     }
 
@@ -117,20 +117,6 @@ class TestController extends Controller
         if(!$test){
             return redirect()->route('test.index')->with('fail', 'We can not found data');
         }
-        // $questions = Question::where('test_id', $id)->get();
-        // if ($questions->isNotEmpty()) {
-        //     foreach ($questions as $question) {
-        //         $results = Result::where('question_id', $question->id)->get();
-        //         if ($results->isNotEmpty()) {
-        //             foreach ($results as $result) {
-        //                 UserTest::where('result_id', $result->id)->delete();
-        //                 $result->delete();
-        //             }
-        //         }
-        //         $question->delete();
-        //     }
-        //     dd('here');
-        // }
         $test->delete();
         return redirect()->route('test.index')->with('success', 'Task deleted successfully');
     }
