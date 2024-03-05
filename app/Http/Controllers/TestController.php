@@ -44,7 +44,7 @@ class TestController extends Controller
             'level'       => $request['level'],
         ]);
 
-        return redirect()->route('test.index')->with('success', 'Test inserted successfully');;
+        return redirect()->route('test.index')->with('success', 'Test inserted successfully');
     }
 
 
@@ -80,6 +80,8 @@ class TestController extends Controller
     public function edit($id)
     {
         $test = Test::findOrFail($id);
+        $questions = Question->where('test_id', $id);
+        dd($questions);
         return view('admin.TestModule.edit', ['test' => $test]);
     }
 
@@ -115,7 +117,7 @@ class TestController extends Controller
     {
         $test = Test::find($id);
         if(!$test){
-            return redirect()->route('test.index')->with('fail', 'We can not found data');
+            return redirect()->route('test.index')->with('error', 'We can not found data');
         }
         $test->delete();
         return redirect()->route('test.index')->with('success', 'Task deleted successfully');

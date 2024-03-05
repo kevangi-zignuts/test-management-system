@@ -23,10 +23,10 @@ class UsersController extends Controller
             $endDate             = Carbon::parse($request->end_date);
             $results             = Result::whereBetween('created_at', [$startDate, $endDate]);
         }
-        $results->appends($request->except('page'));
         $result               = Result::with('test')->where('user_id', $userId);
         $total_test           = $result->count();
         $results              = $results->paginate(5);
+        $results->appends($request->except('page'));
         $totalSumOfPercentage = Result::where('user_id', $userId)->sum('percentage');
         if($total_test != 0){
             $average_percentage = round(($totalSumOfPercentage/$total_test), 2);
