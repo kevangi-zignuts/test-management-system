@@ -18,7 +18,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        return view('admin.testModule.create');
+        return view('admin.TestModule.create');
     }
 
 
