@@ -40,6 +40,7 @@
                                 </a>
                             </div>
                         </div>
+                        {{ dd('here') }}
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table text-center">
@@ -52,43 +53,53 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tests as $test)
+                                        @if (count($tests) > 0)
+                                            @foreach ($tests as $test)
+                                                <tr>
+                                                    <td> {{ $test->test_name }} </td>
+                                                    <td> {{ $test->level }} </td>
+                                                    {{-- {{ str_limit($yourDescriptionVariable, 30, '...') }} --}}
+                                                    <td> {{ \Illuminate\Support\Str::limit($test->description, 10, '') }}
+                                                        <a href="{{ route('test.view', ['id' => $test->id]) }}"
+                                                            class="text-dark">...</a>
+                                                    </td>
+                                                    {{-- <td> {{ $test->description }} </td> --}}
+                                                    <td>
+                                                        <div class=" gap-2">
+                                                            <a href="{{ route('test.view', ['id' => $test->id]) }} "
+                                                                data-bs-toggle="tooltip" title="View Test"><i
+                                                                    class="fa fa-eye text-success"
+                                                                    aria-hidden="true"></i></a>
+                                                            <form
+                                                                action="{{ route('test.delete', ['id' => $test->id]) }}"
+                                                                method="post" class="d-inline pl-0">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn-link"
+                                                                    style="border: none; background: none;"
+                                                                    onclick="return confirm('Are you sure You want to delete')"
+                                                                    data-bs-toggle="tooltip" title="Delete Test"><i
+                                                                        class="fa-solid fa-trash text-danger pl-lg-5"></i></button>
+                                                            </form>
+                                                            <a href="{{ route('test.edit', ['id' => $test->id]) }}"><i
+                                                                    class="fa-solid fa-pen-to-square text-info pl-lg-5"
+                                                                    data-bs-toggle="tooltip"
+                                                                    title="Edit Test Details"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
                                             <tr>
-                                                <td> {{ $test->test_name }} </td>
-                                                <td> {{ $test->level }} </td>
-                                                {{-- {{ str_limit($yourDescriptionVariable, 30, '...') }} --}}
-                                                <td> {{ \Illuminate\Support\Str::limit($test->description, 10, '') }}
-                                                    <a href="{{ route('test.view', ['id' => $test->id]) }}"
-                                                        class="text-dark">...</a>
-                                                </td>
-                                                {{-- <td> {{ $test->description }} </td> --}}
-                                                <td>
-                                                    <div class=" gap-2">
-                                                        <a href="{{ route('test.view', ['id' => $test->id]) }} "
-                                                            data-bs-toggle="tooltip" title="View Test"><i
-                                                                class="fa fa-eye text-success"
-                                                                aria-hidden="true"></i></a>
-                                                        <form action="{{ route('test.delete', ['id' => $test->id]) }}"
-                                                            method="post" class="d-inline pl-0">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn-link"
-                                                                style="border: none; background: none;"
-                                                                onclick="return confirm('Are you sure You want to delete')"
-                                                                data-bs-toggle="tooltip" title="Delete Test"><i
-                                                                    class="fa-solid fa-trash text-danger pl-lg-5"></i></button>
-                                                        </form>
-                                                        <a href="{{ route('test.edit', ['id' => $test->id]) }}"><i
-                                                                class="fa-solid fa-pen-to-square text-info pl-lg-5"
-                                                                data-bs-toggle="tooltip"
-                                                                title="Edit Test Details"></i></a>
-                                                    </div>
+                                                <td colspan="4">
+                                                    No Test Available
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                                 {{ $tests->links('pagination::bootstrap-5') }}
+
                             </div>
                         </div>
                     </div>
