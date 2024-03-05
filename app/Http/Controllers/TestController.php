@@ -18,7 +18,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        return view('admin.testModule.create');
+        return view('admin.TestModule.create');
     }
 
 
@@ -68,7 +68,10 @@ class TestController extends Controller
      */
     public function view($id){
         $test = Test::findOrFail($id);
-        return view('admin.TestModule.view', compact('test'));
+        $questions = Question::where('test_id', $id);
+        $question_count = $questions->count();
+
+        return view('admin.TestModule.view', compact('test', 'question_count'));
     }
 
     /**

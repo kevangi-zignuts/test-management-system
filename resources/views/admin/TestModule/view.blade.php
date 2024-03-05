@@ -61,22 +61,19 @@
                                 </div>
                             </div>
                         </div>
-
-                        <a href="{{ route('questions.index', ['id' => $test->id]) }}"
-                            class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip" title="View All Questions">
-                            <i class="fa-solid fa-clipboard-question"></i>
-                            <span>View Questions</span>
-                        </a>
+                        @if ($question_count > 0)
+                            <a href="{{ route('questions.index', ['id' => $test->id]) }}"
+                                class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip"
+                                title="View All Questions">
+                                <i class="fa-solid fa-clipboard-question"></i>
+                                <span>View Questions</span>
+                            </a>
+                        @endif
                         <a href="{{ route('questions.create', ['id' => $test->id]) }}"
                             class=" btn btn-outline-primary ml-3" data-bs-toggle="tooltip" title="New Questions Add">
                             <i class="fa-solid fa-plus"></i>
                             <span>Add Question</span>
                         </a>
-                        @if (session('error'))
-                            <div id="error-alert" class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
                     </div>
                 </div>
 
